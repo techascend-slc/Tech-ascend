@@ -1,4 +1,10 @@
+"use client";
 import Link from "next/link";
+import {
+  SignInButton,
+  SignedIn,
+  SignedOut,
+} from '@clerk/nextjs';
 
 export default function Home() {
   return (
@@ -37,12 +43,21 @@ export default function Home() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link 
-                href="/register"
-                className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-purple-500/30 text-center"
-              >
-                Join Tech Ascend
-              </Link>
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <button className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-purple-500/30 text-center cursor-pointer">
+                    Join Tech Ascend
+                  </button>
+                </SignInButton>
+              </SignedOut>
+              <SignedIn>
+                <Link 
+                  href="/"
+                  className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-purple-500/30 text-center"
+                >
+                  Join Tech Ascend
+                </Link>
+              </SignedIn>
               <Link 
                 href="/events"
                 className="w-full sm:w-auto border-2 border-purple-500 text-purple-300 hover:bg-purple-500/20 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 text-center"
@@ -121,10 +136,10 @@ export default function Home() {
               Your journey to tech excellence starts here.
             </p>
             <Link 
-              href="/register"
+              href="/events"
               className="inline-block bg-white text-purple-900 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl"
             >
-              Register Today — It&apos;s Free!
+              Register Today!
             </Link>
           </div>
         </div>

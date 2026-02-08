@@ -28,29 +28,29 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group"
             >
               Home
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 group-hover:w-full transition-all duration-300"></span>
             </Link>
-            <Link 
-              href="/events" 
+            <Link
+              href="/events"
               className="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group"
             >
               Events
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 group-hover:w-full transition-all duration-300"></span>
             </Link>
-            <Link 
-              href="/about" 
+            <Link
+              href="/about"
               className="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group"
             >
               About
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 group-hover:w-full transition-all duration-300"></span>
             </Link>
-            <Link 
-              href="/contact" 
+            <Link
+              href="/contact"
               className="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group"
             >
               Contact
@@ -66,20 +66,26 @@ const Navbar = () => {
                   Sign In
                 </button>
               </SignInButton>
-              <SignUpButton mode="modal">
+              <SignInButton mode="modal">
                 <button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-5 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
-                  Register Now
+                  Registration
                 </button>
-              </SignUpButton>
+              </SignInButton>
             </SignedOut>
             <SignedIn>
-              <Link 
-                href="/admin" 
+              <Link
+                href="/events"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-5 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25"
+              >
+                Registration
+              </Link>
+              <Link
+                href="/admin"
                 className="text-gray-300 hover:text-white transition-colors duration-300 font-medium"
               >
                 Dashboard
               </Link>
-              <UserButton 
+              <UserButton
                 afterSignOutUrl="/"
                 appearance={{
                   elements: {
@@ -91,7 +97,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
+          <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden text-gray-300 hover:text-white focus:outline-none"
           >
@@ -108,29 +114,29 @@ const Navbar = () => {
         {/* Mobile Menu */}
         <div className={`md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-96 pb-4' : 'max-h-0'}`}>
           <div className="flex flex-col space-y-3 pt-4 border-t border-purple-800/50">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="text-gray-300 hover:text-white transition-colors duration-300 font-medium px-2 py-2"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
-            <Link 
-              href="/events" 
+            <Link
+              href="/events"
               className="text-gray-300 hover:text-white transition-colors duration-300 font-medium px-2 py-2"
               onClick={() => setIsMenuOpen(false)}
             >
               Events
             </Link>
-            <Link 
-              href="/about" 
+            <Link
+              href="/about"
               className="text-gray-300 hover:text-white transition-colors duration-300 font-medium px-2 py-2"
               onClick={() => setIsMenuOpen(false)}
             >
               About
             </Link>
-            <Link 
-              href="/contact" 
+            <Link
+              href="/contact"
               className="text-gray-300 hover:text-white transition-colors duration-300 font-medium px-2 py-2"
               onClick={() => setIsMenuOpen(false)}
             >
@@ -143,15 +149,22 @@ const Navbar = () => {
                     Sign In
                   </button>
                 </SignInButton>
-                <SignUpButton mode="modal">
+                <SignInButton mode="modal">
                   <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-5 py-2 rounded-full font-medium text-center">
-                    Register Now
+                    Registration
                   </button>
-                </SignUpButton>
+                </SignInButton>
               </SignedOut>
               <SignedIn>
-                <Link 
-                  href="/admin" 
+                <Link
+                  href="/events"
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-5 py-2 rounded-full font-medium text-center"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Registration
+                </Link>
+                <Link
+                  href="/admin"
                   className="text-gray-300 hover:text-white transition-colors duration-300 font-medium px-2 py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
