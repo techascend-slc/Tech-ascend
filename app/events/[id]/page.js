@@ -97,14 +97,14 @@ const EventDetailPage = () => {
             }}
           >
             {/* Overlay/Gradient Background */}
-            <div className={`absolute inset-0 ${
+            {/* <div className={`absolute inset-0 ${
               event.imagePath 
                 ? 'bg-gradient-to-t from-slate-900 via-slate-900/80 to-slate-900/40' 
                 : 'bg-gradient-to-r from-purple-600/30 to-pink-600/30'
-            }`}></div>
+            }`}></div> */}
 
             {/* Content Container */}
-            <div className="relative z-10 w-full">
+            {/* <div className="relative z-10 w-full">
               {!event.imagePath && (
                 <div className="w-24 h-24 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-2xl flex items-center justify-center mx-auto mb-6 overflow-hidden">
                     <span className="text-6xl">{event.image}</span>
@@ -118,7 +118,7 @@ const EventDetailPage = () => {
                 {event.name}
               </h1>
               <p className="text-xl sm:text-2xl text-gray-200 italic max-w-3xl mx-auto drop-shadow-md">{event.tagline}</p>
-            </div>
+            </div> */}
           </div>
 
           {/* Quick Info Cards */}

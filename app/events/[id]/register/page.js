@@ -219,20 +219,14 @@ const RegisterPage = () => {
               <label className="block text-gray-300 text-sm font-medium mb-2">
                 Course <span className="text-red-400">*</span>
               </label>
-              <select
+              <input
+                type="text"
                 name="course"
                 value={formData.course}
                 onChange={handleChange}
-                className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition-colors"
-              >
-                <option value="">Select your course</option>
-                <option value="B.Sc Computer Science">B.Sc Computer Science</option>
-                <option value="BCA">BCA</option>
-                <option value="B.Tech">B.Tech</option>
-                <option value="MCA">MCA</option>
-                <option value="M.Sc Computer Science">M.Sc Computer Science</option>
-                <option value="Other">Other</option>
-              </select>
+                placeholder="Enter your course (e.g., BCA, B.Tech, MCA)"
+                className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 transition-colors"
+              />
             </div>
 
             {/* Year */}
