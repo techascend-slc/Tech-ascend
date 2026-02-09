@@ -4,7 +4,7 @@
  * @description Single event page with full details and registration button
  */
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
@@ -16,6 +16,14 @@ const EventDetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [isRegistered, setIsRegistered] = useState(false);
   const { isLoaded, isSignedIn, user } = useUser();
+  
+  // Submission state
+  const [uploading, setUploading] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [submissionInfo, setSubmissionInfo] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadError, setUploadError] = useState('');
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -54,6 +62,65 @@ const EventDetailPage = () => {
     
     checkRegistration();
   }, [eventId, isLoaded, isSignedIn, user]);
+
+  // Check if user has already submitted
+  useEffect(() => {
+    const checkSubmission = async () => {
+      if (!isLoaded || !isSignedIn || !user) return;
+      const email = user.primaryEmailAddress?.emailAddress;
+      if (!email) return;
+      
+      try {
+        const response = await fetch(`/api/submissions?eventId=${eventId}&userEmail=${encodeURIComponent(email)}`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.hasSubmission) {
+            setHasSubmitted(true);
+            setSubmissionInfo(data.submission);
+          }
+        }
+      } catch (error) {
+        console.error('Error checking submission:', error);
+      }
+    };
+    checkSubmission();
+  }, [eventId, isLoaded, isSignedIn, user]);
+
+  // Handle file upload
+  const handleFileUpload = async () => {
+    if (!selectedFile || !user) return;
+    
+    setUploading(true);
+    setUploadError('');
+    
+    try {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      formData.append('eventId', eventId.toString());
+      formData.append('eventName', event?.name || '');
+      formData.append('userEmail', user.primaryEmailAddress?.emailAddress || '');
+      formData.append('userName', user.fullName || user.firstName || '');
+      
+      const response = await fetch('/api/submissions', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setHasSubmitted(true);
+        setSubmissionInfo(data.submission);
+        setSelectedFile(null);
+      } else {
+        setUploadError(data.error || 'Failed to upload');
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      setUploadError('Failed to upload file');
+    }
+    setUploading(false);
+  };
 
   if (loading) {
     return (
@@ -245,6 +312,205 @@ const EventDetailPage = () => {
                 </div>
               </div>
             )}
+
+            {/* Problem Statement & Submission Section (shown when registration is closed) */}
+            {(() => {
+              const isRegistrationClosed = !event.registrationOpen || (event.deadline && new Date(event.deadline) < new Date());
+              const hasSubmission = event.submissionType && event.submissionType !== 'none';
+              const hasProblemStatement = event.problemStatement && event.problemStatement.trim();
+              
+              if (!isRegistrationClosed || (!hasSubmission && !hasProblemStatement)) return null;
+
+              return (
+                <div className="mb-8 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-500/30 p-6">
+                  <h2 className="text-xl font-bold text-white mb-4 flex items-center">
+                    <span className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center mr-3">📋</span>
+                    Problem Statement / Task
+                  </h2>
+                  
+                  {/* Problem Statement */}
+                  {hasProblemStatement && (
+                    <div className="bg-slate-800/50 rounded-xl p-4 mb-4 whitespace-pre-wrap text-gray-300 leading-relaxed">
+                      {event.problemStatement}
+                    </div>
+                  )}
+
+                  {/* Submission Options */}
+                  {hasSubmission && (() => {
+                    const isSubmissionClosed = event.submissionDeadline && new Date(event.submissionDeadline) < new Date();
+                    
+                    if (isSubmissionClosed) {
+                      return (
+                        <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-center">
+                          <svg className="w-8 h-8 text-red-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <p className="text-red-400 font-medium">Submission Closed</p>
+                          <p className="text-gray-400 text-sm mt-1">
+                            The deadline was {new Date(event.submissionDeadline).toLocaleString()}
+                          </p>
+                        </div>
+                      );
+                    }
+                    
+                    return (
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                        <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                        Submit Your Work
+                        {event.submissionDeadline && (
+                          <span className="text-sm font-normal text-gray-400">
+                            (Deadline: {new Date(event.submissionDeadline).toLocaleString()})
+                          </span>
+                        )}
+                      </h3>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {/* File Upload Option */}
+                        {(event.submissionType === 'file' || event.submissionType === 'both') && (
+                          <div className="bg-slate-700/50 rounded-xl p-4 border border-purple-500/20">
+                            <h4 className="text-white font-medium mb-2 flex items-center gap-2">
+                              <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                              </svg>
+                              Upload File
+                              <span className="text-gray-500 text-xs font-normal">(Max {event.maxFileSize || 10}MB)</span>
+                            </h4>
+                            
+                            {hasSubmitted ? (
+                              <div className="text-center">
+                                <div className="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                                  <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                  </svg>
+                                </div>
+                                <p className="text-green-400 font-medium text-sm">Submitted!</p>
+                                {submissionInfo && (
+                                  <>
+                                    <p className="text-gray-400 text-xs mt-1 truncate">{submissionInfo.fileName}</p>
+                                    <a 
+                                      href={submissionInfo.filePath}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 text-xs mt-2"
+                                    >
+                                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                      </svg>
+                                      View File
+                                    </a>
+                                  </>
+                                )}
+                              </div>
+                            ) : !isSignedIn ? (
+                              <p className="text-gray-400 text-sm">Please sign in to upload</p>
+                            ) : (
+                              <>
+                                <input
+                                  type="file"
+                                  id="submission-file"
+                                  ref={fileInputRef}
+                                  className="hidden"
+                                  onChange={(e) => {
+                                    const file = e.target.files?.[0];
+                                    if (file) {
+                                      const maxSize = (event.maxFileSize || 10) * 1024 * 1024;
+                                      if (file.size > maxSize) {
+                                        setUploadError(`File too large. Max size is ${event.maxFileSize || 10}MB`);
+                                        setSelectedFile(null);
+                                        e.target.value = ''; // Reset input
+                                      } else {
+                                        setUploadError('');
+                                        setSelectedFile(file);
+                                      }
+                                    }
+                                  }}
+                                />
+                                {selectedFile ? (
+                                  <div className="space-y-2">
+                                    <div className="flex items-center gap-2">
+                                      <p className="text-white text-sm truncate flex-1">{selectedFile.name}</p>
+                                      <button
+                                        onClick={() => {
+                                          setSelectedFile(null);
+                                          setUploadError('');
+                                          if (fileInputRef.current) {
+                                            fileInputRef.current.value = '';
+                                          }
+                                        }}
+                                        className="p-1 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors"
+                                        title="Remove file"
+                                      >
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                    <p className="text-gray-500 text-xs">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                                    <button
+                                      onClick={handleFileUpload}
+                                      disabled={uploading}
+                                      className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                                    >
+                                      {uploading ? (
+                                        <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Uploading...</>
+                                      ) : (
+                                        <>Upload Now</>
+                                      )}
+                                    </button>
+                                  </div>
+                                ) : (
+                                  <label
+                                    htmlFor="submission-file"
+                                    className="w-full px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                                  >
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                    </svg>
+                                    Choose File
+                                  </label>
+                                )}
+                                {uploadError && (
+                                  <p className="text-red-400 text-xs mt-2">{uploadError}</p>
+                                )}
+                              </>
+                            )}
+                          </div>
+                        )}
+
+                        {/* Google Drive Option */}
+                        {(event.submissionType === 'drive' || event.submissionType === 'both') && event.driveLink && (
+                          <div className="bg-slate-700/50 rounded-xl p-4 border border-green-500/20">
+                            <h4 className="text-white font-medium mb-2 flex items-center gap-2">
+                              <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M4.433 22l3.775-6.5H22l-3.775 6.5H4.433zM14.6 8.5L7.825 22H.25l6.775-13.5H14.6zm-.85 0L6.975 22l-6.75-13.5H6.925L13.7 1.5l6.775 13.5H13.75z"/>
+                              </svg>
+                              Google Drive
+                            </h4>
+                            <p className="text-gray-400 text-sm mb-3">Upload to our Drive folder</p>
+                            <a 
+                              href={event.driveLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                            >
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                              </svg>
+                              Open Google Drive
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                  })()}
+                </div>
+              );
+            })()}
 
             {/* Register Button */}
             <div className="text-center pt-4">

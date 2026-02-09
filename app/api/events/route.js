@@ -113,7 +113,13 @@ export async function POST(request) {
       registrationOpen: body.registrationOpen !== undefined ? body.registrationOpen : true,
       prizes: body.prizes || [],
       requirements: body.requirements || [],
-      highlights: body.highlights || []
+      highlights: body.highlights || [],
+      // Submission fields
+      problemStatement: body.problemStatement || '',
+      submissionType: body.submissionType || 'none',
+      driveLink: body.driveLink || '',
+      submissionDeadline: body.submissionDeadline || '',
+      maxFileSize: body.maxFileSize || 10,
     };
     
     const newEvent = await Event.create(newEventData);

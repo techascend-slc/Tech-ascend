@@ -45,6 +45,25 @@ const EventSchema = new mongoose.Schema({
   prizes: [String],
   requirements: [String],
   highlights: [String],
+  // Submission fields (shown after registration closes)
+  problemStatement: {
+    type: String, // Task/problem description for participants
+  },
+  submissionType: {
+    type: String,
+    enum: ['none', 'file', 'drive', 'both'],
+    default: 'none', // Admin chooses: none, file upload, drive link, or both
+  },
+  driveLink: {
+    type: String, // Google Drive folder link for submissions
+  },
+  submissionDeadline: {
+    type: String, // Deadline for submissions
+  },
+  maxFileSize: {
+    type: Number, // Max file size in MB (default 10MB)
+    default: 10,
+  },
 }, {
   timestamps: true,
 });

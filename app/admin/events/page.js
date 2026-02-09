@@ -102,7 +102,13 @@ const AdminEventsPage = () => {
         registrationOpen: event.registrationOpen !== undefined ? event.registrationOpen : true,
         prizes: event.prizes || [],
         requirements: event.requirements || [],
-        highlights: event.highlights || []
+        highlights: event.highlights || [],
+        // Submission fields
+        problemStatement: event.problemStatement || '',
+        submissionType: event.submissionType || 'none',
+        driveLink: event.driveLink || '',
+        submissionDeadline: event.submissionDeadline || '',
+        maxFileSize: event.maxFileSize || 10,
       });
       setImagePreview(event.imagePath || null);
     } else {
@@ -124,7 +130,13 @@ const AdminEventsPage = () => {
         registrationOpen: true,
         prizes: [],
         requirements: [],
-        highlights: []
+        highlights: [],
+        // Submission fields
+        problemStatement: '',
+        submissionType: 'none',
+        driveLink: '',
+        submissionDeadline: '',
+        maxFileSize: 10,
       });
       setImagePreview(null);
     }
@@ -194,10 +206,18 @@ const AdminEventsPage = () => {
     try {
       const cleanedForm = {
         ...editForm,
-        prizes: editForm.prizes.filter(p => p.trim()),
-        requirements: editForm.requirements.filter(r => r.trim()),
-        highlights: editForm.highlights.filter(h => h.trim())
+        prizes: editForm.prizes?.filter(p => p.trim()) || [],
+        requirements: editForm.requirements?.filter(r => r.trim()) || [],
+        highlights: editForm.highlights?.filter(h => h.trim()) || [],
+        // Ensure submission fields are included
+        problemStatement: editForm.problemStatement || '',
+        submissionType: editForm.submissionType || 'none',
+        driveLink: editForm.driveLink || '',
+        submissionDeadline: editForm.submissionDeadline || '',
+        maxFileSize: editForm.maxFileSize || 10,
       };
+      
+      console.log('Saving event with data:', cleanedForm);
 
       const method = editForm.id ? 'PUT' : 'POST';
       const response = await fetch('/api/events', {
@@ -545,13 +565,12 @@ const AdminEventsPage = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-400 text-sm mb-2">Registration Deadline Text</label>
+                  <label className="block text-gray-400 text-sm mb-2">Registration Deadline</label>
                   <input
-                    type="text"
-                    value={editForm.registrationDeadline}
-                    onChange={(e) => handleFormChange('registrationDeadline', e.target.value)}
-                    className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
-                    placeholder="e.g., March 14, 2026, 11:59 PM"
+                    type="datetime-local"
+                    value={editForm.deadline}
+                    onChange={(e) => handleFormChange('deadline', e.target.value)}
+                    className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500 [color-scheme:dark]"
                   />
                 </div>
               </div>
@@ -628,6 +647,86 @@ const AdminEventsPage = () => {
                 >
                   + Add Requirement
                 </button>
+              </div>
+
+              {/* Submission Settings Section */}
+              <div className="border-t border-purple-500/20 pt-4 mt-4">
+                <h4 className="text-white font-semibold mb-4 flex items-center gap-2">
+                  <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Submission Settings
+                  <span className="text-gray-500 text-xs font-normal">(shown after registration closes)</span>
+                </h4>
+
+                {/* Problem Statement */}
+                <div className="mb-4">
+                  <label className="block text-gray-400 text-sm mb-2">Problem Statement / Task</label>
+                  <textarea
+                    value={editForm.problemStatement || ''}
+                    onChange={(e) => handleFormChange('problemStatement', e.target.value)}
+                    className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500 min-h-[100px]"
+                    placeholder="Enter the problem statement or task that participants need to complete..."
+                  />
+                </div>
+
+                {/* Submission Type */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label className="block text-gray-400 text-sm mb-2">Submission Type</label>
+                    <select
+                      value={editForm.submissionType || 'none'}
+                      onChange={(e) => handleFormChange('submissionType', e.target.value)}
+                      className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                    >
+                      <option value="none">No Submissions</option>
+                      <option value="file">File Upload Only</option>
+                      <option value="drive">Google Drive Link Only</option>
+                      <option value="both">Both (File & Drive)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-gray-400 text-sm mb-2">Submission Deadline</label>
+                    <input
+                      type="datetime-local"
+                      value={editForm.submissionDeadline || ''}
+                      onChange={(e) => handleFormChange('submissionDeadline', e.target.value)}
+                      className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500 [color-scheme:dark]"
+                    />
+                  </div>
+                </div>
+
+                {/* Drive Link (shown when drive or both is selected) */}
+                {(editForm.submissionType === 'drive' || editForm.submissionType === 'both') && (
+                  <div className="mb-4">
+                    <label className="block text-gray-400 text-sm mb-2">Google Drive Folder Link</label>
+                    <input
+                      type="url"
+                      value={editForm.driveLink || ''}
+                      onChange={(e) => handleFormChange('driveLink', e.target.value)}
+                      className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                      placeholder="https://drive.google.com/drive/folders/..."
+                    />
+                    <p className="text-gray-500 text-xs mt-1">Participants will be directed to this link to upload their submissions</p>
+                  </div>
+                )}
+
+                {/* Max File Size (shown when file upload is enabled) */}
+                {(editForm.submissionType === 'file' || editForm.submissionType === 'both') && (
+                  <div>
+                    <label className="block text-gray-400 text-sm mb-2">Max File Size (MB)</label>
+                    <input
+                      type="number"
+                      min="1"
+                      max="100"
+                      value={editForm.maxFileSize || 10}
+                      onChange={(e) => handleFormChange('maxFileSize', parseInt(e.target.value) || 10)}
+                      className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                      placeholder="10"
+                    />
+                    <p className="text-gray-500 text-xs mt-1">Maximum file size participants can upload</p>
+                  </div>
+                )}
               </div>
             </div>
 
