@@ -1,3 +1,8 @@
+/**
+ * @page Contact Page
+ * @route /contact
+ * @description Contact information (Coming Soon placeholder)
+ */
 import Link from 'next/link';
 
 export const metadata = {

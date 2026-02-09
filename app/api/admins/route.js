@@ -1,3 +1,9 @@
+/**
+ * @api Admins API
+ * @route /api/admins
+ * @description Manage admin users (admin only)
+ * @methods GET (list), POST (add), DELETE (remove)
+ */
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Admin from '@/models/Admin';

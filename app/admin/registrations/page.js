@@ -1,3 +1,8 @@
+/**
+ * @page Event Registrations
+ * @route /admin/registrations
+ * @description View and filter registrations by event with export functionality
+ */
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/nextjs';

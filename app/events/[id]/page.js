@@ -1,3 +1,8 @@
+/**
+ * @page Event Details
+ * @route /events/[id]
+ * @description Single event page with full details and registration button
+ */
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';

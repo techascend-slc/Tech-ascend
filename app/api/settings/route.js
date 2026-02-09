@@ -1,3 +1,9 @@
+/**
+ * @api Settings API
+ * @route /api/settings
+ * @description Global app settings (registration open/closed)
+ * @methods GET (public), POST (admin only)
+ */
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Setting from '@/models/Setting';

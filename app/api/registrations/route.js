@@ -1,3 +1,9 @@
+/**
+ * @api Registrations API
+ * @route /api/registrations
+ * @description CRUD operations for event registrations
+ * @methods GET (fetch), POST (create), DELETE (remove - admin only)
+ */
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Registration from '@/models/Registration';

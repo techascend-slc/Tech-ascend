@@ -1,3 +1,9 @@
+/**
+ * @api Events API
+ * @route /api/events
+ * @description CRUD operations for events
+ * @methods GET (public), POST/PUT/DELETE (admin only)
+ */
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Event from '@/models/Event';

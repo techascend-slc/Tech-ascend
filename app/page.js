@@ -1,3 +1,8 @@
+/**
+ * @page Home Page
+ * @route /
+ * @description Landing page with hero section and features
+ */
 "use client";
 import Link from "next/link";
 import {

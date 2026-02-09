@@ -1,3 +1,9 @@
+/**
+ * @api Upload API
+ * @route /api/upload
+ * @description Image upload for events (admin only)
+ * @methods POST (upload image)
+ */
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';

@@ -1,3 +1,8 @@
+/**
+ * @page Events List
+ * @route /events
+ * @description Browse all available events and register for them
+ */
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
