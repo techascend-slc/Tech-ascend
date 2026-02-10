@@ -4,8 +4,6 @@
  * @description Handle file submissions from participants
  */
 import { NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
 import dbConnect from '@/lib/mongodb';
 import Submission from '@/models/Submission';
 import { auth } from '@clerk/nextjs/server';
@@ -33,33 +31,32 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // Create submissions directory if it doesn't exist
-    const submissionsDir = path.join(process.cwd(), 'public', 'submissions', eventId.toString());
-    await mkdir(submissionsDir, { recursive: true });
-
-    // Generate unique filename
-    const timestamp = Date.now();
-    const safeEmail = userEmail.replace(/[^a-zA-Z0-9]/g, '_');
-    const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-    const fileName = `${safeEmail}_${timestamp}_${originalName}`;
-    const filePath = path.join(submissionsDir, fileName);
-
-    // Write file to disk
+    // Convert file to base64
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    await writeFile(filePath, buffer);
+    const base64Content = buffer.toString('base64');
+    
+    // Generate unique filename
+    const timestamp = Date.now();
+    const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+    const fileName = `${timestamp}_${originalName}`;
 
-    // Save submission to database
+    // Create submission with base64 content
     const submission = await Submission.create({
       eventId: parseInt(eventId),
       eventName: eventName || '',
       userEmail,
       userName: userName || '',
       fileName: file.name,
-      filePath: `/submissions/${eventId}/${fileName}`,
+      filePath: `/api/download`, // Virtual path, will append ID when needed or construct in frontend
+      fileContent: base64Content,
       fileSize: file.size,
       fileType: file.type,
     });
+    
+    // Update filePath with ID for download link
+    submission.filePath = `/api/download?id=${submission._id}`;
+    await submission.save();
 
     return NextResponse.json({
       success: true,

@@ -417,9 +417,14 @@ const EventDetailPage = () => {
                                   onChange={(e) => {
                                     const file = e.target.files?.[0];
                                     if (file) {
-                                      const maxSize = (event.maxFileSize || 10) * 1024 * 1024;
+                                      // Enforce 4MB hard limit for MongoDB storage
+                                      const DB_LIMIT_MB = 4;
+                                      const eventLimit = event.maxFileSize || 10;
+                                      const maxFileSizeMB = Math.min(eventLimit, DB_LIMIT_MB);
+                                      
+                                      const maxSize = maxFileSizeMB * 1024 * 1024;
                                       if (file.size > maxSize) {
-                                        setUploadError(`File too large. Max size is ${event.maxFileSize || 10}MB`);
+                                        setUploadError(`File too large. Max size is ${maxFileSizeMB}MB`);
                                         setSelectedFile(null);
                                         e.target.value = ''; // Reset input
                                       } else {
