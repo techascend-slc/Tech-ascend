@@ -7,7 +7,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { useUser } from '@clerk/nextjs';
+import { useUser, SignInButton } from '@clerk/nextjs';
 
 const EventDetailPage = () => {
   const params = useParams();
@@ -553,6 +553,18 @@ const EventDetailPage = () => {
                   );
                 }
 
+                // User not signed in - show sign-in button
+                if (!isSignedIn) {
+                  return (
+                    <SignInButton mode="modal" redirectUrl={`/events/${eventId}/register`}>
+                      <button className="inline-block bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-orange-500/30 cursor-pointer">
+                        Sign In to Register
+                      </button>
+                    </SignInButton>
+                  );
+                }
+
+                // User is signed in - show registration link
                 return (
                   <Link
                     href={`/events/${eventId}/register`}
