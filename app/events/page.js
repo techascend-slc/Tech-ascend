@@ -53,19 +53,19 @@ const EventsPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-16 flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a0a] pt-24 pb-16 flex items-center justify-center">
         <div className="text-white text-xl">Loading events...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-16">
+    <div className="min-h-screen bg-[#0a0a0a] pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Upcoming <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Events</span>
+            Upcoming <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-400">Events</span>
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Register for exciting tech events, competitions, and workshops. Showcase your skills and learn from the best!
@@ -77,10 +77,10 @@ const EventsPage = () => {
           {events.map((event) => (
             <div 
               key={event.id}
-              className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl hover:shadow-purple-500/10 group flex flex-col h-full"
+              className="bg-[#111]/50 backdrop-blur-sm rounded-2xl p-6 border border-[#333] hover:border-orange-500/50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl hover:shadow-orange-500/10 group flex flex-col h-full"
             >
               {/* Event Image/Icon */}
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 overflow-hidden">
                 {event.imagePath ? (
                   <img src={event.imagePath} alt={event.name} className="w-full h-full object-cover rounded-xl" />
                 ) : (
@@ -89,12 +89,12 @@ const EventsPage = () => {
               </div>
 
               {/* Category Badge */}
-              <span className="inline-block px-3 py-1 text-sm font-medium text-purple-400 bg-purple-500/10 rounded-full mb-3">
+              <span className="inline-block px-3 py-1 text-sm font-medium text-orange-400 bg-orange-500/10 rounded-full mb-3">
                 {event.category}
               </span>
 
               {/* Event Name */}
-              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors duration-300">
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-orange-400 transition-colors duration-300">
                 {event.name}
               </h3>
 
@@ -125,7 +125,7 @@ const EventsPage = () => {
                     </span>
                     <Link 
                       href={`/events/${event.id}`}
-                      className="block w-full bg-slate-700/50 hover:bg-slate-700 text-white py-2 rounded-xl font-medium transition-all duration-300 text-center text-sm flex items-center justify-center gap-2"
+                      className="block w-full bg-[#222] hover:bg-[#333] text-white py-2 rounded-xl font-medium transition-all duration-300 text-center text-sm flex items-center justify-center gap-2"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -141,7 +141,7 @@ const EventsPage = () => {
                 return (
                   <button
                     disabled
-                    className="block w-full bg-slate-700/50 border border-slate-600 text-gray-400 py-3 rounded-xl font-medium cursor-not-allowed mt-auto"
+                    className="block w-full bg-[#1a1a1a] border border-[#333] text-gray-500 py-3 rounded-xl font-medium cursor-not-allowed mt-auto"
                   >
                     {isExpired ? 'Registration Ended' : 'Registration Closed'}
                   </button>
@@ -151,7 +151,7 @@ const EventsPage = () => {
               return (
                 <Link 
                   href={`/events/${event.id}`}
-                  className="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25 text-center mt-auto"
+                  className="block w-full bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-orange-500/25 text-center mt-auto"
                 >
                   Register Now
                 </Link>
@@ -165,7 +165,7 @@ const EventsPage = () => {
         <div className="text-center mt-12">
           <Link 
             href="/"
-            className="inline-flex items-center text-purple-400 hover:text-purple-300 transition-colors duration-300 font-medium"
+            className="inline-flex items-center text-orange-400 hover:text-orange-300 transition-colors duration-300 font-medium"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

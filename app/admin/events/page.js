@@ -302,7 +302,7 @@ const AdminEventsPage = () => {
       <AdminLayout>
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
-            <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
             <p className="text-gray-400">Loading...</p>
           </div>
         </div>
@@ -312,14 +312,14 @@ const AdminEventsPage = () => {
 
   if (!user || isAdmin === false) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
         <div className="text-center">
           <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
             <span className="text-4xl">⛔</span>
           </div>
           <h1 className="text-3xl font-bold text-white mb-4">Access Denied</h1>
           <p className="text-gray-400 mb-6">You don&apos;t have permission to access this page.</p>
-          <Link href="/" className="text-purple-400 hover:text-purple-300">← Back to Home</Link>
+          <Link href="/" className="text-orange-400 hover:text-orange-300">← Back to Home</Link>
         </div>
       </div>
     );
@@ -335,7 +335,7 @@ const AdminEventsPage = () => {
         </div>
         <button
           onClick={() => openEditModal(null)}
-          className="p-2 sm:px-4 sm:py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-medium transition-colors flex items-center gap-2"
+          className="p-2 sm:px-4 sm:py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-medium transition-colors flex items-center gap-2"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -345,16 +345,16 @@ const AdminEventsPage = () => {
       </div>
 
       {/* Events Grid */}
-      <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-3 sm:p-6 border border-purple-500/20">
+      <div className="bg-[#111]/50 backdrop-blur-sm rounded-2xl p-3 sm:p-6 border border-[#333]">
         {events.length === 0 ? (
           <div className="text-center py-12">
-            <div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-3xl">📅</span>
             </div>
             <p className="text-gray-400 mb-4">No events found</p>
             <button
               onClick={() => openEditModal(null)}
-              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
+              className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors"
             >
               Create First Event
             </button>
@@ -364,11 +364,11 @@ const AdminEventsPage = () => {
             {events.map((event) => (
               <div 
                 key={event.id}
-                className="flex items-center justify-between p-2 sm:p-4 bg-slate-700/30 rounded-xl border border-purple-500/10 hover:border-purple-500/30 transition-colors gap-2"
+                className="flex items-center justify-between p-2 sm:p-4 bg-[#222]/50 rounded-xl border border-[#333] hover:border-orange-500/30 transition-colors gap-2"
               >
                 <div className="flex items-center gap-2 sm:gap-4 min-w-0 flex-1">
                   {/* Hide image on mobile */}
-                  <div className="hidden sm:flex w-12 h-12 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl items-center justify-center overflow-hidden flex-shrink-0">
+                  <div className="hidden sm:flex w-12 h-12 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-xl items-center justify-center overflow-hidden flex-shrink-0">
                     {event.imagePath ? (
                       <img src={event.imagePath} alt={event.name} className="w-full h-full object-cover rounded-xl" />
                     ) : (
@@ -398,7 +398,7 @@ const AdminEventsPage = () => {
                 <div className="flex items-center gap-1 flex-shrink-0">
                   <button
                     onClick={() => openEditModal(event)}
-                    className="p-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                    className="p-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg transition-colors"
                     title="Edit event"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -424,7 +424,7 @@ const AdminEventsPage = () => {
       {/* Delete Event Modal */}
       {deleteEventModal.show && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-800 rounded-2xl p-6 max-w-md w-full border border-purple-500/20">
+          <div className="bg-[#111] rounded-2xl p-6 max-w-md w-full border border-[#333]">
             <h3 className="text-xl font-bold text-white mb-2">Delete Event</h3>
             <p className="text-gray-400 mb-6">
               Are you sure you want to delete &quot;{deleteEventModal.event?.name}&quot;? This action cannot be undone.
@@ -432,7 +432,7 @@ const AdminEventsPage = () => {
             <div className="flex gap-3">
               <button
                 onClick={() => setDeleteEventModal({ show: false, event: null })}
-                className="flex-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-medium transition-colors"
+                className="flex-1 px-4 py-2 bg-[#222] hover:bg-[#333] text-white rounded-xl font-medium transition-colors"
               >
                 Cancel
               </button>
@@ -458,7 +458,7 @@ const AdminEventsPage = () => {
       {/* Edit Event Modal */}
       {editModal.show && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
-          <div className="bg-slate-800 rounded-2xl p-6 max-w-2xl w-full border border-purple-500/20 my-8 max-h-[90vh] overflow-y-auto">
+          <div className="bg-[#111] rounded-2xl p-6 max-w-2xl w-full border border-[#333] my-8 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-white">
                 {editForm.id ? 'Edit Event' : 'Add New Event'}
@@ -478,7 +478,7 @@ const AdminEventsPage = () => {
               <div>
                 <label className="block text-gray-400 text-sm mb-2">Event Image</label>
                 <div className="flex items-center gap-4">
-                  <div className="w-20 h-20 bg-slate-700/50 rounded-xl flex items-center justify-center overflow-hidden border border-purple-500/20">
+                  <div className="w-20 h-20 bg-[#222]/50 rounded-xl flex items-center justify-center overflow-hidden border border-[#333]">
                     {imagePreview ? (
                       <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
                     ) : (
@@ -495,7 +495,7 @@ const AdminEventsPage = () => {
                     />
                     <label
                       htmlFor="imageUpload"
-                      className="cursor-pointer px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors inline-flex items-center gap-2 text-sm"
+                      className="cursor-pointer px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors inline-flex items-center gap-2 text-sm"
                     >
                       {uploadingImage ? 'Uploading...' : 'Upload Image'}
                     </label>
@@ -512,7 +512,7 @@ const AdminEventsPage = () => {
                     type="text"
                     value={editForm.name}
                     onChange={(e) => handleFormChange('name', e.target.value)}
-                    className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                    className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500"
                     placeholder="Enter event name"
                   />
                 </div>
@@ -522,7 +522,7 @@ const AdminEventsPage = () => {
                     type="text"
                     value={editForm.category}
                     onChange={(e) => handleFormChange('category', e.target.value)}
-                    className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                    className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500"
                     placeholder="e.g., Competition, Workshop"
                   />
                 </div>
@@ -534,7 +534,7 @@ const AdminEventsPage = () => {
                   type="text"
                   value={editForm.tagline}
                   onChange={(e) => handleFormChange('tagline', e.target.value)}
-                  className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                  className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500"
                   placeholder="Short tagline for the event"
                 />
               </div>
@@ -544,7 +544,7 @@ const AdminEventsPage = () => {
                 <textarea
                   value={editForm.description}
                   onChange={(e) => handleFormChange('description', e.target.value)}
-                  className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500 min-h-[100px]"
+                  className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500 min-h-[100px]"
                   placeholder="Detailed event description"
                 />
               </div>
@@ -557,7 +557,7 @@ const AdminEventsPage = () => {
                     type="text"
                     value={editForm.date}
                     onChange={(e) => handleFormChange('date', e.target.value)}
-                    className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                    className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500"
                     placeholder="e.g., March 15, 2026"
                   />
                 </div>
@@ -567,7 +567,7 @@ const AdminEventsPage = () => {
                     type="text"
                     value={editForm.time}
                     onChange={(e) => handleFormChange('time', e.target.value)}
-                    className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                    className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500"
                     placeholder="e.g., 10:00 AM"
                   />
                 </div>
@@ -577,7 +577,7 @@ const AdminEventsPage = () => {
                     type="text"
                     value={editForm.duration}
                     onChange={(e) => handleFormChange('duration', e.target.value)}
-                    className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                    className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500"
                     placeholder="e.g., 3 hours"
                   />
                 </div>
@@ -590,7 +590,7 @@ const AdminEventsPage = () => {
                   <select
                     value={editForm.mode}
                     onChange={(e) => handleFormChange('mode', e.target.value)}
-                    className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                    className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500"
                   >
                     <option value="Offline">Offline</option>
                     <option value="Online">Online</option>
@@ -603,7 +603,7 @@ const AdminEventsPage = () => {
                     type="text"
                     value={editForm.location}
                     onChange={(e) => handleFormChange('location', e.target.value)}
-                    className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                    className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500"
                     placeholder="Event venue"
                   />
                 </div>
@@ -617,7 +617,7 @@ const AdminEventsPage = () => {
                     type="text"
                     value={editForm.teamSize}
                     onChange={(e) => handleFormChange('teamSize', e.target.value)}
-                    className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                    className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500"
                     placeholder="e.g., Individual or 2-4"
                   />
                 </div>
@@ -627,13 +627,13 @@ const AdminEventsPage = () => {
                     type="datetime-local"
                     value={editForm.deadline}
                     onChange={(e) => handleFormChange('deadline', e.target.value)}
-                    className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500 [color-scheme:dark]"
+                    className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500 [color-scheme:dark]"
                   />
                 </div>
               </div>
 
               {/* Registration Status */}
-              <div className="flex items-center justify-between p-4 bg-slate-700/30 rounded-xl">
+              <div className="flex items-center justify-between p-4 bg-[#222]/50 rounded-xl">
                 <div>
                   <p className="text-white font-medium">Registration Open</p>
                   <p className="text-gray-400 text-sm">Allow users to register for this event</p>
@@ -641,7 +641,7 @@ const AdminEventsPage = () => {
                 <button
                   onClick={() => handleFormChange('registrationOpen', !editForm.registrationOpen)}
                   className={`w-12 h-6 rounded-full transition-colors ${
-                    editForm.registrationOpen ? 'bg-green-500' : 'bg-slate-600'
+                    editForm.registrationOpen ? 'bg-green-500' : 'bg-[#444]'
                   }`}
                 >
                   <div className={`w-5 h-5 bg-white rounded-full transition-transform ${
@@ -659,7 +659,7 @@ const AdminEventsPage = () => {
                       type="text"
                       value={prize}
                       onChange={(e) => handleArrayChange('prizes', index, e.target.value)}
-                      className="flex-1 bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500 text-sm"
+                      className="flex-1 bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500 text-sm"
                       placeholder="Prize description"
                     />
                     <button
@@ -672,7 +672,7 @@ const AdminEventsPage = () => {
                 ))}
                 <button
                   onClick={() => addArrayItem('prizes')}
-                  className="text-purple-400 hover:text-purple-300 text-sm"
+                  className="text-orange-400 hover:text-orange-300 text-sm"
                 >
                   + Add Prize
                 </button>
@@ -687,7 +687,7 @@ const AdminEventsPage = () => {
                       type="text"
                       value={req}
                       onChange={(e) => handleArrayChange('requirements', index, e.target.value)}
-                      className="flex-1 bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500 text-sm"
+                      className="flex-1 bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500 text-sm"
                       placeholder="Requirement"
                     />
                     <button
@@ -700,16 +700,16 @@ const AdminEventsPage = () => {
                 ))}
                 <button
                   onClick={() => addArrayItem('requirements')}
-                  className="text-purple-400 hover:text-purple-300 text-sm"
+                  className="text-orange-400 hover:text-orange-300 text-sm"
                 >
                   + Add Requirement
                 </button>
               </div>
 
               {/* Submission Settings Section */}
-              <div className="border-t border-purple-500/20 pt-4 mt-4">
+              <div className="border-t border-[#333] pt-4 mt-4">
                 <h4 className="text-white font-semibold mb-4 flex items-center gap-2">
-                  <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                   Submission Settings
@@ -722,7 +722,7 @@ const AdminEventsPage = () => {
                   <textarea
                     value={editForm.problemStatement || ''}
                     onChange={(e) => handleFormChange('problemStatement', e.target.value)}
-                    className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500 min-h-[100px]"
+                    className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500 min-h-[100px]"
                     placeholder="Enter the problem statement or task that participants need to complete..."
                   />
                 </div>
@@ -734,7 +734,7 @@ const AdminEventsPage = () => {
                     <select
                       value={editForm.submissionType || 'none'}
                       onChange={(e) => handleFormChange('submissionType', e.target.value)}
-                      className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                      className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500"
                     >
                       <option value="none">No Submissions</option>
                       <option value="file">File Upload Only</option>
@@ -748,7 +748,7 @@ const AdminEventsPage = () => {
                       type="datetime-local"
                       value={editForm.submissionDeadline || ''}
                       onChange={(e) => handleFormChange('submissionDeadline', e.target.value)}
-                      className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500 [color-scheme:dark]"
+                      className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500 [color-scheme:dark]"
                     />
                   </div>
                 </div>
@@ -761,7 +761,7 @@ const AdminEventsPage = () => {
                       type="url"
                       value={editForm.driveLink || ''}
                       onChange={(e) => handleFormChange('driveLink', e.target.value)}
-                      className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                      className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500"
                       placeholder="https://drive.google.com/drive/folders/..."
                     />
                     <p className="text-gray-500 text-xs mt-1">Participants will be directed to this link to upload their submissions</p>
@@ -778,7 +778,7 @@ const AdminEventsPage = () => {
                       max="100"
                       value={editForm.maxFileSize || 10}
                       onChange={(e) => handleFormChange('maxFileSize', parseInt(e.target.value) || 10)}
-                      className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+                      className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-2 text-white focus:outline-none focus:border-orange-500"
                       placeholder="10"
                     />
                     <p className="text-gray-500 text-xs mt-1">Maximum file size participants can upload</p>
@@ -788,17 +788,18 @@ const AdminEventsPage = () => {
             </div>
 
             {/* Modal Actions */}
-            <div className="flex gap-3 mt-6 pt-4 border-t border-purple-500/20">
+            <div className="flex gap-3 mt-6 pt-4 border-t border-[#333]">
               <button
                 onClick={() => setEditModal({ show: false, event: null })}
-                className="flex-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-medium transition-colors"
+                className="flex-1 px-4 py-2 bg-[#222] hover:bg-[#333] text-white rounded-xl font-medium transition-colors"
+                title="Cancel"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSaveEvent}
                 disabled={saving || !editForm.name}
-                className="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                className="flex-1 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {saving ? (
                   <>

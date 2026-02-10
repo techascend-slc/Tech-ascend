@@ -31,14 +31,22 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-[#0a0a0a] text-white relative overflow-hidden font-sans">
+      {/* Background SVG */}
+      <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen pointer-events-none">
+        <img 
+            src="/background.svg" 
+            alt="Background" 
+            className="w-full h-full object-cover object-center"
+        />
+      </div>
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        {/* Animated background elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" style={{ animationDelay: '2s' }}></div>
+      <section className="relative overflow-hidden z-10">
+        {/* Animated background elements (Updated colors) */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-orange-500 rounded-full mix-blend-screen filter blur-3xl opacity-10 animate-pulse"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-amber-500 rounded-full mix-blend-screen filter blur-3xl opacity-10 animate-pulse" style={{ animationDelay: '1s' }}></div>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
@@ -46,13 +54,13 @@ export default function Home() {
             {/* Badge */}
             <div className={`inline-flex items-center px-4 py-2 rounded-full border mb-8 ${
               registrationOpen 
-                ? 'bg-purple-800/50 border-purple-600/50' 
-                : 'bg-red-900/50 border-red-700/50'
+                ? 'bg-orange-900/30 border-orange-500/30' 
+                : 'bg-red-900/30 border-red-700/30'
             }`}>
               <span className={`w-2 h-2 rounded-full mr-2 ${
                 registrationOpen ? 'bg-green-400 animate-pulse' : 'bg-red-500'
               }`}></span>
-              <span className="text-purple-200 text-sm font-medium">
+              <span className="text-orange-200 text-sm font-medium">
                 {registrationOpen ? 'Registration Open' : 'Registration Closed'}
               </span>
             </div>
@@ -60,13 +68,13 @@ export default function Home() {
             {/* Main Heading */}
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Welcome to{" "}
-              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 bg-clip-text text-transparent">
                 Tech Ascend
               </span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed">
               A Computer Science society where students code, debug, and grow through hands-on innovation.
             </p>
 
@@ -74,7 +82,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <SignedOut>
                 <SignInButton mode="modal">
-                  <button className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-purple-500/30 text-center cursor-pointer">
+                  <button className="w-full sm:w-auto bg-white text-black hover:bg-gray-200 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl text-center cursor-pointer">
                     Join Tech Ascend
                   </button>
                 </SignInButton>
@@ -82,7 +90,7 @@ export default function Home() {
 
               <Link 
                 href="/events"
-                className="w-full sm:w-auto border-2 border-purple-500 text-purple-300 hover:bg-purple-500/20 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 text-center"
+                className="w-full sm:w-auto border border-[#333] bg-[#111] text-white hover:bg-[#222] px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 text-center"
               >
                 View Events
               </Link>
@@ -92,11 +100,11 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="relative py-20 sm:py-28">
+      <section className="relative py-20 sm:py-28 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Why Join <span className="text-purple-400">Tech Ascend</span>?
+              Why Join <span className="text-orange-500">Tech Ascend</span>?
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Discover opportunities that will accelerate your growth in technology
@@ -105,8 +113,8 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-purple-800/30 rounded-2xl p-8 hover:border-purple-600/50 transition-all duration-300 group">
-              <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="bg-[#111]/50 backdrop-blur-sm border border-[#333] rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300 group">
+              <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
@@ -118,8 +126,8 @@ export default function Home() {
             </div>
 
             {/* Feature 2 */}
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-purple-800/30 rounded-2xl p-8 hover:border-purple-600/50 transition-all duration-300 group">
-              <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="bg-[#111]/50 backdrop-blur-sm border border-[#333] rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300 group">
+              <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
@@ -131,8 +139,8 @@ export default function Home() {
             </div>
 
             {/* Feature 3 */}
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-purple-800/30 rounded-2xl p-8 hover:border-purple-600/50 transition-all duration-300 group">
-              <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="bg-[#111]/50 backdrop-blur-sm border border-[#333] rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300 group">
+              <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                 </svg>
@@ -147,9 +155,9 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-20 sm:py-28">
+      <section className="relative py-20 sm:py-28 z-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-gradient-to-r from-purple-800/50 to-pink-800/50 backdrop-blur-sm border border-purple-600/30 rounded-3xl p-10 sm:p-14">
+          <div className="bg-gradient-to-r from-orange-900/30 to-amber-900/30 backdrop-blur-sm border border-orange-500/30 rounded-3xl p-10 sm:p-14">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Ready to Ascend?
             </h2>
@@ -158,7 +166,7 @@ export default function Home() {
             </p>
             <Link 
               href="/events"
-              className="inline-block bg-white text-purple-900 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl"
+              className="inline-block bg-white text-black hover:bg-gray-200 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl"
             >
               Register Today!
             </Link>
@@ -167,11 +175,11 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-purple-800/30 py-10">
+      <footer className="border-t border-[#333] py-10 z-10 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-amber-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">T</span>
               </div>
               <span className="text-white font-semibold">Tech Ascend</span>

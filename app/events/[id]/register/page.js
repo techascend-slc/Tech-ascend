@@ -131,18 +131,21 @@ const RegisterPage = () => {
 
   if (eventLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-16 flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
+      <div className="min-h-screen bg-[#0a0a0a] pt-24 pb-16 flex items-center justify-center">
+        <div className="text-white text-xl flex items-center gap-3">
+          <div className="w-6 h-6 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+          Loading...
+        </div>
       </div>
     );
   }
 
   if (!event) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-16 flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a0a] pt-24 pb-16 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-white mb-4">Event Not Found</h1>
-          <Link href="/events" className="text-purple-400 hover:text-purple-300">
+          <Link href="/events" className="text-orange-400 hover:text-orange-300">
             ← Back to Events
           </Link>
         </div>
@@ -152,9 +155,9 @@ const RegisterPage = () => {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-16 flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a0a] pt-24 pb-16 flex items-center justify-center">
         <div className="max-w-md mx-auto text-center px-4">
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-3xl border border-green-500/30 p-8">
+          <div className="bg-[#111]/50 backdrop-blur-sm rounded-3xl border border-green-500/30 p-8">
             <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg className="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -162,12 +165,12 @@ const RegisterPage = () => {
             </div>
             <h2 className="text-2xl font-bold text-white mb-2">Registration Successful!</h2>
             <p className="text-gray-400 mb-6">
-              You have been registered for <span className="text-purple-400 font-medium">{event.name}</span>. 
+              You have been registered for <span className="text-orange-400 font-medium">{event.name}</span>. 
               Check your email for confirmation.
             </p>
             <Link 
               href="/events"
-              className="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-xl font-medium hover:from-purple-700 hover:to-pink-700 transition-all"
+              className="inline-block bg-gradient-to-r from-orange-600 to-amber-600 text-white px-6 py-3 rounded-xl font-medium hover:from-orange-700 hover:to-amber-700 transition-all font-outfit"
             >
               Back to Events
             </Link>
@@ -178,12 +181,12 @@ const RegisterPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-16">
+    <div className="min-h-screen bg-[#0a0a0a] pt-24 pb-16 font-outfit">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <Link 
           href={`/events/${eventId}`}
-          className="inline-flex items-center text-purple-400 hover:text-purple-300 transition-colors duration-300 mb-6"
+          className="inline-flex items-center text-orange-400 hover:text-orange-300 transition-colors duration-300 mb-6"
         >
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -192,10 +195,10 @@ const RegisterPage = () => {
         </Link>
 
         {/* Form Card */}
-        <div className="bg-slate-800/50 backdrop-blur-sm rounded-3xl border border-purple-500/20 overflow-hidden">
+        <div className="bg-[#111]/50 backdrop-blur-sm rounded-3xl border border-[#333] overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-purple-600/30 to-pink-600/30 p-6 text-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-xl flex items-center justify-center mx-auto mb-4 overflow-hidden">
+          <div className="bg-gradient-to-r from-orange-600/20 to-amber-600/20 p-6 text-center border-b border-[#333]">
+            <div className="w-16 h-16 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-xl flex items-center justify-center mx-auto mb-4 overflow-hidden border border-orange-500/20">
               {event.imagePath ? (
                 <img src={event.imagePath} alt={event.name} className="w-full h-full object-cover rounded-xl" />
               ) : (
@@ -203,7 +206,7 @@ const RegisterPage = () => {
               )}
             </div>
             <h1 className="text-2xl font-bold text-white mb-1">Register for {event.name}</h1>
-            <p className="text-purple-200">{event.date}</p>
+            <p className="text-orange-200/80">{event.date}</p>
           </div>
 
           {/* Form */}
@@ -219,7 +222,7 @@ const RegisterPage = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Enter your full name"
-                className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors"
               />
             </div>
 
@@ -234,7 +237,7 @@ const RegisterPage = () => {
                 value={formData.course}
                 onChange={handleChange}
                 placeholder="Enter your course (e.g., BCA, B.Tech, MCA)"
-                className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors"
               />
             </div>
 
@@ -247,7 +250,7 @@ const RegisterPage = () => {
                 name="year"
                 value={formData.year}
                 onChange={handleChange}
-                className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-orange-500 transition-colors"
               >
                 <option value="">Select your year</option>
                 <option value="1st Year">1st Year</option>
@@ -268,7 +271,7 @@ const RegisterPage = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
-                className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors"
               />
               {alreadyRegistered && (
                 <p className="text-yellow-400 text-sm mt-2">⚠️ This email is already registered for this event</p>
@@ -281,25 +284,25 @@ const RegisterPage = () => {
                 College <span className="text-red-400">*</span>
               </label>
               <div className="space-y-3">
-                <label className="flex items-center p-3 bg-slate-700/30 rounded-xl cursor-pointer hover:bg-slate-700/50 transition-colors">
+                <label className="flex items-center p-3 bg-[#222]/50 rounded-xl cursor-pointer hover:bg-[#333]/50 transition-colors border border-transparent hover:border-[#333]">
                   <input
                     type="radio"
                     name="college"
                     value="shyam_lal"
                     checked={formData.college === 'shyam_lal'}
                     onChange={handleChange}
-                    className="w-4 h-4 text-purple-600 focus:ring-purple-500"
+                    className="w-4 h-4 text-orange-600 focus:ring-orange-500 accent-orange-500"
                   />
                   <span className="ml-3 text-white">Shyam Lal College</span>
                 </label>
-                <label className="flex items-center p-3 bg-slate-700/30 rounded-xl cursor-pointer hover:bg-slate-700/50 transition-colors">
+                <label className="flex items-center p-3 bg-[#222]/50 rounded-xl cursor-pointer hover:bg-[#333]/50 transition-colors border border-transparent hover:border-[#333]">
                   <input
                     type="radio"
                     name="college"
                     value="other"
                     checked={formData.college === 'other'}
                     onChange={handleChange}
-                    className="w-4 h-4 text-purple-600 focus:ring-purple-500"
+                    className="w-4 h-4 text-orange-600 focus:ring-orange-500 accent-orange-500"
                   />
                   <span className="ml-3 text-white">Other</span>
                 </label>
@@ -311,7 +314,7 @@ const RegisterPage = () => {
                     value={formData.otherCollege}
                     onChange={handleChange}
                     placeholder="Enter your college name"
-                    className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 transition-colors mt-2"
+                    className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors mt-2"
                   />
                 )}
               </div>
@@ -328,13 +331,13 @@ const RegisterPage = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Enter your phone number"
-                className="w-full bg-slate-700/50 border border-purple-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full bg-[#222]/50 border border-[#333] rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors"
               />
             </div>
 
             {/* Error Message */}
             {error && (
-              <div className="bg-red-500/20 border border-red-500/30 rounded-xl p-4 text-red-400 text-sm">
+              <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-red-400 text-sm">
                 {error}
               </div>
             )}
@@ -343,7 +346,7 @@ const RegisterPage = () => {
             <button
               type="submit"
               disabled={isSubmitting || alreadyRegistered}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-[1.02] shadow-xl hover:shadow-purple-500/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className="w-full bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-[1.02] shadow-xl hover:shadow-orange-500/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {isSubmitting ? 'Registering...' : alreadyRegistered ? 'Already Registered' : 'Register Now'}
             </button>

@@ -140,7 +140,7 @@ const RegistrationsPage = () => {
       <AdminLayout>
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
-            <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
             <p className="text-gray-400">Loading...</p>
           </div>
         </div>
@@ -150,14 +150,14 @@ const RegistrationsPage = () => {
 
   if (!user || isAdmin === false) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
         <div className="text-center">
           <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
             <span className="text-4xl">⛔</span>
           </div>
           <h1 className="text-3xl font-bold text-white mb-4">Access Denied</h1>
           <p className="text-gray-400 mb-6">You don&apos;t have permission to access this page.</p>
-          <Link href="/" className="text-purple-400 hover:text-purple-300">← Back to Home</Link>
+          <Link href="/" className="text-orange-400 hover:text-orange-300">← Back to Home</Link>
         </div>
       </div>
     );
@@ -182,12 +182,12 @@ const RegistrationsPage = () => {
           onClick={() => setSelectedEvent('all')}
           className={`p-4 rounded-2xl border transition-all text-left ${
             selectedEvent === 'all'
-              ? 'bg-purple-600/30 border-purple-500/50 shadow-lg shadow-purple-500/20'
-              : 'bg-slate-800/50 border-purple-500/20 hover:border-purple-500/40'
+              ? 'bg-orange-600/20 border-orange-500/50 shadow-lg shadow-orange-500/20'
+              : 'bg-[#111]/50 border-orange-500/20 hover:border-orange-500/40'
           }`}
         >
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-purple-500/20 rounded-xl flex items-center justify-center">
+            <div className="w-10 h-10 bg-orange-500/20 rounded-xl flex items-center justify-center">
               <span className="text-xl">📋</span>
             </div>
             <span className="text-2xl font-bold text-white">{registrations.length}</span>
@@ -202,12 +202,12 @@ const RegistrationsPage = () => {
             onClick={() => setSelectedEvent(event.id.toString())}
             className={`p-4 rounded-2xl border transition-all text-left ${
               selectedEvent === event.id.toString()
-                ? 'bg-purple-600/30 border-purple-500/50 shadow-lg shadow-purple-500/20'
-                : 'bg-slate-800/50 border-purple-500/20 hover:border-purple-500/40'
+                ? 'bg-orange-600/20 border-orange-500/50 shadow-lg shadow-orange-500/20'
+                : 'bg-[#111]/50 border-orange-500/20 hover:border-orange-500/40'
             }`}
           >
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center overflow-hidden">
+              <div className="w-10 h-10 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-xl flex items-center justify-center overflow-hidden">
                 {event.imagePath ? (
                   <img src={event.imagePath} alt={event.name} className="w-full h-full object-cover rounded-xl" />
                 ) : (
@@ -222,16 +222,16 @@ const RegistrationsPage = () => {
       </div>
 
       {/* Actions Bar */}
-      <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-4 border border-purple-500/20 mb-6 flex flex-wrap items-center justify-between gap-4">
+      <div className="bg-[#111]/50 backdrop-blur-sm rounded-2xl p-4 border border-[#333] mb-6 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <span className="text-gray-400">Showing:</span>
           <span className="text-white font-medium">{selectedEventName}</span>
-          <span className="text-purple-400">({filteredRegistrations.length} registrations)</span>
+          <span className="text-orange-400">({filteredRegistrations.length} registrations)</span>
         </div>
         <button 
           onClick={() => exportToExcel(filteredRegistrations, selectedEventName)}
           disabled={filteredRegistrations.length === 0}
-          className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          className="px-4 py-2 bg-green-600/20 hover:bg-green-600/30 border border-green-500/30 text-green-400 rounded-xl font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -241,10 +241,10 @@ const RegistrationsPage = () => {
       </div>
 
       {/* Registrations Table */}
-      <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20">
+      <div className="bg-[#111]/50 backdrop-blur-sm rounded-2xl p-6 border border-[#333]">
         {filteredRegistrations.length === 0 ? (
           <div className="text-center py-12">
-            <div className="w-16 h-16 bg-slate-700/50 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-[#222] rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-3xl">📋</span>
             </div>
             <p className="text-gray-400">No registrations found for this event</p>
@@ -254,7 +254,7 @@ const RegistrationsPage = () => {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-purple-500/20">
+                <tr className="border-b border-[#333]">
                   <th className="text-left py-3 px-4 text-gray-400 font-medium">#</th>
                   <th className="text-left py-3 px-4 text-gray-400 font-medium">Name</th>
                   <th className="text-left py-3 px-4 text-gray-400 font-medium">Email</th>
@@ -271,12 +271,12 @@ const RegistrationsPage = () => {
               </thead>
               <tbody>
                 {filteredRegistrations.map((reg, index) => (
-                  <tr key={reg.id} className="border-b border-purple-500/10 hover:bg-purple-500/5 transition-colors">
+                  <tr key={reg.id} className="border-b border-[#222] hover:bg-[#222]/50 transition-colors">
                     <td className="py-4 px-4 text-gray-500">{index + 1}</td>
                     <td className="py-4 px-4">
                       <div className="flex items-center">
-                        <div className="w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center mr-3">
-                          <span className="text-purple-400 text-sm font-medium">
+                        <div className="w-8 h-8 bg-orange-500/20 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-orange-400 text-sm font-medium">
                             {reg.name?.charAt(0)?.toUpperCase() || '?'}
                           </span>
                         </div>
@@ -290,7 +290,7 @@ const RegistrationsPage = () => {
                     <td className="py-4 px-4 text-gray-300 text-sm">{reg.phone || '-'}</td>
                     {selectedEvent === 'all' && (
                       <td className="py-4 px-4">
-                        <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded-lg text-xs font-medium">
+                        <span className="px-2 py-1 bg-orange-500/10 text-orange-300 rounded-lg text-xs font-medium">
                           {reg.eventName}
                         </span>
                       </td>
@@ -326,7 +326,7 @@ const RegistrationsPage = () => {
       {/* Delete Confirmation Modal */}
       {deleteModal.show && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-800 rounded-2xl border border-purple-500/20 p-6 max-w-md w-full shadow-2xl">
+          <div className="bg-[#111] rounded-2xl border border-[#333] p-6 max-w-md w-full shadow-2xl">
             <div className="text-center">
               <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -335,14 +335,14 @@ const RegistrationsPage = () => {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Delete Registration?</h3>
               <p className="text-gray-400 mb-2">Are you sure you want to delete this registration?</p>
-              <div className="bg-slate-700/50 rounded-lg p-3 mb-6">
+              <div className="bg-[#222] rounded-lg p-3 mb-6">
                 <p className="text-white font-medium">{deleteModal.registration?.name}</p>
                 <p className="text-gray-400 text-sm">{deleteModal.registration?.email}</p>
               </div>
               <div className="flex gap-3">
                 <button
                   onClick={() => setDeleteModal({ show: false, registration: null })}
-                  className="flex-1 px-4 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-medium transition-colors"
+                  className="flex-1 px-4 py-3 bg-[#222] hover:bg-[#333] text-white rounded-xl font-medium transition-colors"
                 >
                   Cancel
                 </button>

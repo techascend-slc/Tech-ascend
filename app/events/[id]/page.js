@@ -124,7 +124,7 @@ const EventDetailPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-16 flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a0a] pt-24 pb-16 flex items-center justify-center">
         <div className="text-white text-xl">Loading event...</div>
       </div>
     );
@@ -132,10 +132,10 @@ const EventDetailPage = () => {
 
   if (!event) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-16 flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a0a] pt-24 pb-16 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-white mb-4">Event Not Found</h1>
-          <Link href="/events" className="text-purple-400 hover:text-purple-300">
+          <Link href="/events" className="text-orange-400 hover:text-orange-300">
             ← Back to Events
           </Link>
         </div>
@@ -144,12 +144,12 @@ const EventDetailPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-16">
+    <div className="min-h-screen bg-[#0a0a0a] pt-24 pb-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <Link 
           href="/events"
-          className="inline-flex items-center text-purple-400 hover:text-purple-300 transition-colors duration-300 mb-8"
+          className="inline-flex items-center text-orange-400 hover:text-orange-300 transition-colors duration-300 mb-8"
         >
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -158,7 +158,7 @@ const EventDetailPage = () => {
         </Link>
 
         {/* Event Header */}
-        <div className="bg-slate-800/50 backdrop-blur-sm rounded-3xl border border-purple-500/20 overflow-hidden mb-8">
+        <div className="bg-[#111]/50 backdrop-blur-sm rounded-3xl border border-[#333] overflow-hidden mb-8">
           {/* Hero Section */}
           <div 
             className="relative p-8 sm:p-12 text-center overflow-hidden min-h-[400px] flex flex-col justify-center items-center"
@@ -168,22 +168,22 @@ const EventDetailPage = () => {
               backgroundPosition: 'center',
             }}
           >
-            {/* Overlay/Gradient Background */}
-            {/* <div className={`absolute inset-0 ${
+           {/* Overlay/Gradient Background */}
+             {/* <div className={`absolute inset-0 ${
               event.imagePath 
-                ? 'bg-gradient-to-t from-slate-900 via-slate-900/80 to-slate-900/40' 
-                : 'bg-gradient-to-r from-purple-600/30 to-pink-600/30'
+                ? 'bg-gradient-to-t from-black via-black/80 to-black/40' 
+                : 'bg-gradient-to-r from-orange-600/30 to-amber-600/30'
             }`}></div> */}
 
             {/* Content Container */}
             {/* <div className="relative z-10 w-full">
               {!event.imagePath && (
-                <div className="w-24 h-24 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-2xl flex items-center justify-center mx-auto mb-6 overflow-hidden">
+                <div className="w-24 h-24 bg-gradient-to-br from-orange-500/30 to-amber-500/30 rounded-2xl flex items-center justify-center mx-auto mb-6 overflow-hidden">
                     <span className="text-6xl">{event.image}</span>
                 </div>
               )}
               
-              <span className="inline-block px-4 py-1 text-sm font-medium text-purple-200 bg-purple-900/50 backdrop-blur-sm border border-purple-500/30 rounded-full mb-4">
+              <span className="inline-block px-4 py-1 text-sm font-medium text-orange-200 bg-orange-900/50 backdrop-blur-sm border border-orange-500/30 rounded-full mb-4">
                 {event.category}
               </span>
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-4 drop-shadow-lg">
@@ -194,9 +194,9 @@ const EventDetailPage = () => {
           </div>
 
           {/* Quick Info Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 border-b border-purple-500/20">
-            <div className="text-center p-4 bg-slate-700/30 rounded-xl">
-              <div className="text-purple-400 mb-1">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 border-b border-[#333]">
+            <div className="text-center p-4 bg-[#222]/50 rounded-xl">
+              <div className="text-orange-400 mb-1">
                 <svg className="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
@@ -204,8 +204,8 @@ const EventDetailPage = () => {
               <p className="text-gray-400 text-xs mb-1">Date</p>
               <p className="text-white font-medium text-sm">{event.date}</p>
             </div>
-            <div className="text-center p-4 bg-slate-700/30 rounded-xl">
-              <div className="text-purple-400 mb-1">
+            <div className="text-center p-4 bg-[#222]/50 rounded-xl">
+              <div className="text-orange-400 mb-1">
                 <svg className="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -213,8 +213,8 @@ const EventDetailPage = () => {
               <p className="text-gray-400 text-xs mb-1">Duration</p>
               <p className="text-white font-medium text-sm">{event.duration}</p>
             </div>
-            <div className="text-center p-4 bg-slate-700/30 rounded-xl">
-              <div className="text-purple-400 mb-1">
+            <div className="text-center p-4 bg-[#222]/50 rounded-xl">
+              <div className="text-orange-400 mb-1">
                 <svg className="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
@@ -222,8 +222,8 @@ const EventDetailPage = () => {
               <p className="text-gray-400 text-xs mb-1">Mode</p>
               <p className="text-white font-medium text-sm">{event.mode}</p>
             </div>
-            <div className="text-center p-4 bg-slate-700/30 rounded-xl">
-              <div className="text-purple-400 mb-1">
+            <div className="text-center p-4 bg-[#222]/50 rounded-xl">
+              <div className="text-orange-400 mb-1">
                 <svg className="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
@@ -238,7 +238,7 @@ const EventDetailPage = () => {
             {/* About */}
             <div className="mb-8">
               <h2 className="text-xl font-bold text-white mb-4 flex items-center">
-                <span className="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center mr-3">📋</span>
+                <span className="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center mr-3">📋</span>
                 About the Event
               </h2>
               <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">{event.description}</p>
@@ -247,7 +247,7 @@ const EventDetailPage = () => {
             {/* Details Grid */}
             <div className="grid sm:grid-cols-2 gap-6 mb-8">
               {/* Time & Location */}
-              <div className="bg-slate-700/30 rounded-xl p-5">
+              <div className="bg-[#222]/50 rounded-xl p-5">
                 <h3 className="text-lg font-semibold text-white mb-4">📍 Venue & Timing</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between">
@@ -266,12 +266,12 @@ const EventDetailPage = () => {
               </div>
 
               {/* Requirements */}
-              <div className="bg-slate-700/30 rounded-xl p-5">
+              <div className="bg-[#222]/50 rounded-xl p-5">
                 <h3 className="text-lg font-semibold text-white mb-4">📝 Requirements</h3>
                 <ul className="space-y-2">
                   {event.requirements && event.requirements.map((req, index) => (
                     <li key={index} className="flex items-start text-gray-300">
-                      <span className="text-purple-400 mr-2">✓</span>
+                      <span className="text-orange-400 mr-2">✓</span>
                       {req}
                     </li>
                   ))}
@@ -283,7 +283,7 @@ const EventDetailPage = () => {
             {event.prizes && event.prizes.length > 0 && (
               <div className="mb-8">
                 <h2 className="text-xl font-bold text-white mb-4 flex items-center">
-                  <span className="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center mr-3">🏆</span>
+                  <span className="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center mr-3">🏆</span>
                   Prizes
                 </h2>
                 <div className="flex flex-wrap gap-3">
@@ -300,13 +300,13 @@ const EventDetailPage = () => {
             {event.highlights && event.highlights.length > 0 && (
               <div className="mb-8">
                 <h2 className="text-xl font-bold text-white mb-4 flex items-center">
-                  <span className="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center mr-3">✨</span>
+                  <span className="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center mr-3">✨</span>
                   Highlights
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {event.highlights.map((highlight, index) => (
-                    <div key={index} className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-3 text-center">
-                      <span className="text-purple-200 text-sm">{highlight}</span>
+                    <div key={index} className="bg-orange-500/10 border border-orange-500/20 rounded-xl p-3 text-center">
+                      <span className="text-orange-200 text-sm">{highlight}</span>
                     </div>
                   ))}
                 </div>
@@ -322,7 +322,7 @@ const EventDetailPage = () => {
               if (!isRegistrationClosed || (!hasSubmission && !hasProblemStatement)) return null;
 
               return (
-                <div className="mb-8 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-500/30 p-6">
+                <div className="mb-8 bg-gradient-to-br from-blue-500/10 to-orange-500/10 rounded-2xl border border-blue-500/30 p-6">
                   <h2 className="text-xl font-bold text-white mb-4 flex items-center">
                     <span className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center mr-3">📋</span>
                     Problem Statement / Task
@@ -330,7 +330,7 @@ const EventDetailPage = () => {
                   
                   {/* Problem Statement */}
                   {hasProblemStatement && (
-                    <div className="bg-slate-800/50 rounded-xl p-4 mb-4 whitespace-pre-wrap text-gray-300 leading-relaxed">
+                    <div className="bg-[#111]/50 rounded-xl p-4 mb-4 whitespace-pre-wrap text-gray-300 leading-relaxed">
                       {event.problemStatement}
                     </div>
                   )}
@@ -370,9 +370,9 @@ const EventDetailPage = () => {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {/* File Upload Option */}
                         {(event.submissionType === 'file' || event.submissionType === 'both') && (
-                          <div className="bg-slate-700/50 rounded-xl p-4 border border-purple-500/20">
+                          <div className="bg-[#222]/50 rounded-xl p-4 border border-orange-500/20">
                             <h4 className="text-white font-medium mb-2 flex items-center gap-2">
-                              <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                               </svg>
                               Upload File
@@ -394,7 +394,7 @@ const EventDetailPage = () => {
                                       href={submissionInfo.filePath}
                                       target="_blank"
                                       rel="noopener noreferrer"
-                                      className="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 text-xs mt-2"
+                                      className="inline-flex items-center gap-1 text-orange-400 hover:text-orange-300 text-xs mt-2"
                                     >
                                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -470,7 +470,7 @@ const EventDetailPage = () => {
                                 ) : (
                                   <label
                                     htmlFor="submission-file"
-                                    className="w-full px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                                    className="w-full px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2 cursor-pointer"
                                   >
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
@@ -488,7 +488,7 @@ const EventDetailPage = () => {
 
                         {/* Google Drive Option */}
                         {(event.submissionType === 'drive' || event.submissionType === 'both') && event.driveLink && (
-                          <div className="bg-slate-700/50 rounded-xl p-4 border border-green-500/20">
+                          <div className="bg-[#222]/50 rounded-xl p-4 border border-green-500/20">
                             <h4 className="text-white font-medium mb-2 flex items-center gap-2">
                               <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M4.433 22l3.775-6.5H22l-3.775 6.5H4.433zM14.6 8.5L7.825 22H.25l6.775-13.5H14.6zm-.85 0L6.975 22l-6.75-13.5H6.925L13.7 1.5l6.775 13.5H13.75z"/>
@@ -546,7 +546,7 @@ const EventDetailPage = () => {
                   return (
                     <button
                       disabled
-                      className="inline-block bg-slate-700/50 border border-slate-600 text-gray-400 px-10 py-4 rounded-full font-semibold text-lg cursor-not-allowed"
+                      className="inline-block bg-[#1a1a1a] border border-[#333] text-gray-400 px-10 py-4 rounded-full font-semibold text-lg cursor-not-allowed"
                     >
                       {isExpired ? 'Registration Ended' : 'Registration Closed'}
                     </button>
@@ -556,7 +556,7 @@ const EventDetailPage = () => {
                 return (
                   <Link
                     href={`/events/${eventId}/register`}
-                    className="inline-block bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-purple-500/30"
+                    className="inline-block bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-orange-500/30"
                   >
                     Register for {event.name}
                   </Link>

@@ -71,7 +71,7 @@ export default function AdminLayout({ children }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-[#0a0a0a]">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div 
@@ -81,13 +81,13 @@ export default function AdminLayout({ children }) {
       )}
 
       {/* Sidebar */}
-      <aside className={`fixed top-0 left-0 z-50 h-full w-64 bg-slate-800/95 backdrop-blur-sm border-r border-purple-500/20 transform transition-transform duration-300 ease-in-out ${
+      <aside className={`fixed top-0 left-0 z-50 h-full w-64 bg-[#111]/95 backdrop-blur-sm border-r border-[#333] transform transition-transform duration-300 ease-in-out ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       } lg:translate-x-0`}>
         {/* Logo */}
-        <div className="flex items-center justify-between h-16 px-4 border-b border-purple-500/20">
+        <div className="flex items-center justify-between h-16 px-4 border-b border-[#333]">
           <Link href="/admin" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-amber-500 rounded-lg flex items-center justify-center">
               <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -113,8 +113,8 @@ export default function AdminLayout({ children }) {
               onClick={() => setSidebarOpen(false)}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all ${
                 isActive(item.href)
-                  ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/25'
-                  : 'text-gray-400 hover:text-white hover:bg-slate-700/50'
+                  ? 'bg-gradient-to-r from-orange-600 to-amber-600 text-white shadow-lg shadow-orange-500/25'
+                  : 'text-gray-400 hover:text-white hover:bg-[#222]'
               }`}
             >
               {item.icon}
@@ -124,10 +124,10 @@ export default function AdminLayout({ children }) {
         </nav>
 
         {/* User info & logout */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-purple-500/20">
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#333]">
           <div className="flex items-center gap-3 mb-3 px-2">
-            <div className="w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center">
-              <span className="text-purple-400 text-sm font-medium">
+            <div className="w-8 h-8 bg-orange-500/20 rounded-full flex items-center justify-center">
+              <span className="text-orange-400 text-sm font-medium">
                 {user?.primaryEmailAddress?.emailAddress?.charAt(0).toUpperCase() || 'A'}
               </span>
             </div>
@@ -140,7 +140,7 @@ export default function AdminLayout({ children }) {
           </div>
           <button
             onClick={() => signOut({ redirectUrl: '/' })}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-xl font-medium transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-xl font-medium transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -153,7 +153,7 @@ export default function AdminLayout({ children }) {
       {/* Main content */}
       <div className="lg:pl-64">
         {/* Top bar for mobile */}
-        <header className="lg:hidden sticky top-0 z-30 h-16 bg-slate-800/95 backdrop-blur-sm border-b border-purple-500/20 flex items-center justify-between px-4">
+        <header className="lg:hidden sticky top-0 z-30 h-16 bg-[#111]/95 backdrop-blur-sm border-b border-[#333] flex items-center justify-between px-4">
           <button
             onClick={() => setSidebarOpen(true)}
             className="text-gray-400 hover:text-white"

@@ -82,7 +82,7 @@ const AdminSubmissionsPage = () => {
       <AdminLayout>
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
-            <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
             <p className="text-gray-400">Loading...</p>
           </div>
         </div>
@@ -92,10 +92,14 @@ const AdminSubmissionsPage = () => {
 
   if (!user || isAdmin === false) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
         <div className="text-center">
-            <h1 className="text-3xl font-bold text-white mb-4">Access Denied</h1>
-            <p className="text-gray-400">You don&apos;t have permission to access this page.</p>
+          <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <span className="text-4xl">⛔</span>
+          </div>
+          <h1 className="text-3xl font-bold text-white mb-4">Access Denied</h1>
+          <p className="text-gray-400 mb-6">You don&apos;t have permission to access this page.</p>
+          <Link href="/" className="text-orange-400 hover:text-orange-300">← Back to Home</Link>
         </div>
       </div>
     );
@@ -110,7 +114,7 @@ const AdminSubmissionsPage = () => {
         </div>
         <button 
             onClick={fetchSubmissions}
-            className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors text-white"
+            className="p-2 bg-[#222] hover:bg-[#333] rounded-lg transition-colors text-white border border-[#333]"
             title="Refresh"
         >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -119,10 +123,10 @@ const AdminSubmissionsPage = () => {
         </button>
       </div>
 
-      <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-purple-500/20 overflow-hidden">
+      <div className="bg-[#111]/50 backdrop-blur-sm rounded-2xl border border-[#333] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-slate-700/50">
+            <thead className="bg-[#222]/50">
               <tr>
                 <th className="px-6 py-4 text-gray-400 font-medium text-sm">Student</th>
                 <th className="px-6 py-4 text-gray-400 font-medium text-sm">Event</th>
@@ -131,7 +135,7 @@ const AdminSubmissionsPage = () => {
                 <th className="px-6 py-4 text-gray-400 font-medium text-sm text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-purple-500/10">
+            <tbody className="divide-y divide-[#222]">
               {submissions.length === 0 ? (
                 <tr>
                   <td colSpan="5" className="px-6 py-8 text-center text-gray-500">
@@ -140,17 +144,17 @@ const AdminSubmissionsPage = () => {
                 </tr>
               ) : (
                 submissions.map((submission) => (
-                  <tr key={submission._id} className="hover:bg-slate-700/20 transition-colors">
+                  <tr key={submission._id} className="hover:bg-[#222]/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="text-white font-medium">{submission.userName}</div>
                       <div className="text-gray-500 text-xs">{submission.userEmail}</div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="text-blue-300 text-sm font-medium">{submission.eventName || `Event #${submission.eventId}`}</div>
+                      <div className="text-orange-300 text-sm font-medium">{submission.eventName || `Event #${submission.eventId}`}</div>
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                         <span className="text-gray-300 text-sm truncate max-w-[200px]" title={submission.fileName}>
@@ -170,7 +174,7 @@ const AdminSubmissionsPage = () => {
                           href={`/api/download?id=${submission._id}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-2 text-purple-400 hover:bg-purple-500/10 rounded-lg transition-colors"
+                          className="p-2 text-orange-400 hover:bg-orange-500/10 rounded-lg transition-colors"
                           title="Download File"
                         >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -180,7 +184,7 @@ const AdminSubmissionsPage = () => {
                         <button
                           onClick={() => handleDelete(submission._id, submission.fileName, 'reset')}
                           disabled={deletingId === submission._id}
-                          className="px-3 py-1.5 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-400 rounded-lg transition-colors disabled:opacity-50 text-sm font-medium flex items-center gap-2"
+                          className="px-3 py-1.5 bg-yellow-600/10 hover:bg-yellow-600/20 text-yellow-400 rounded-lg transition-colors disabled:opacity-50 text-sm font-medium flex items-center gap-2"
                           title="Allow Re-submit"
                         >
                            {deletingId === submission._id ? (

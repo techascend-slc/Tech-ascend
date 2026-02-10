@@ -169,7 +169,7 @@ const AdminSettingsPage = () => {
       <AdminLayout>
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
-            <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
             <p className="text-gray-400">Loading...</p>
           </div>
         </div>
@@ -179,14 +179,14 @@ const AdminSettingsPage = () => {
 
   if (!user || isAdmin === false) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
         <div className="text-center">
           <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
             <span className="text-4xl">⛔</span>
           </div>
           <h1 className="text-3xl font-bold text-white mb-4">Access Denied</h1>
           <p className="text-gray-400 mb-6">You don&apos;t have permission to access this page.</p>
-          <Link href="/" className="text-purple-400 hover:text-purple-300">← Back to Home</Link>
+          <Link href="/" className="text-orange-400 hover:text-orange-300">← Back to Home</Link>
         </div>
       </div>
     );
@@ -201,10 +201,10 @@ const AdminSettingsPage = () => {
       </div>
 
       {/* Global Settings */}
-      <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-purple-500/20 mb-6 sm:mb-8">
+      <div className="bg-[#111]/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-[#333] mb-6 sm:mb-8">
         <h2 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Global Settings</h2>
         
-        <div className="flex items-center justify-between p-3 sm:p-4 bg-slate-700/30 rounded-xl gap-3">
+        <div className="flex items-center justify-between p-3 sm:p-4 bg-[#222]/50 rounded-xl gap-3">
           <div className="min-w-0">
             <p className="text-white font-medium text-sm sm:text-base">Registration Status</p>
             <p className="text-gray-400 text-xs sm:text-sm hidden sm:block">Control site-wide registrations</p>
@@ -213,7 +213,7 @@ const AdminSettingsPage = () => {
             onClick={toggleRegistrationStatus}
             disabled={updatingSettings}
             className={`relative w-12 h-6 sm:w-14 sm:h-7 rounded-full transition-colors flex-shrink-0 ${
-              registrationOpen ? 'bg-green-500' : 'bg-slate-600'
+              registrationOpen ? 'bg-green-500' : 'bg-[#444]'
             } ${updatingSettings ? 'opacity-50' : ''}`}
           >
             <div className={`absolute top-0.5 sm:top-1 w-5 h-5 bg-white rounded-full transition-transform ${
@@ -222,7 +222,7 @@ const AdminSettingsPage = () => {
           </button>
         </div>
 
-        <div className="mt-3 sm:mt-4 p-3 sm:p-4 bg-slate-700/30 rounded-xl flex items-center gap-2 sm:gap-3">
+        <div className="mt-3 sm:mt-4 p-3 sm:p-4 bg-[#222]/50 rounded-xl flex items-center gap-2 sm:gap-3">
           <div className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full flex-shrink-0 ${registrationOpen ? 'bg-green-400 animate-pulse' : 'bg-red-400'}`}></div>
           <span className={`text-xs sm:text-sm ${registrationOpen ? 'text-green-400' : 'text-red-400'}`}>
             {registrationOpen ? 'OPEN' : 'CLOSED'}
@@ -231,7 +231,7 @@ const AdminSettingsPage = () => {
       </div>
 
       {/* Manage Admins */}
-      <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-purple-500/20">
+      <div className="bg-[#111]/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-[#333]">
         <h2 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Admins</h2>
         
         {/* Add Admin Form */}
@@ -241,12 +241,12 @@ const AdminSettingsPage = () => {
             value={newAdminEmail}
             onChange={(e) => setNewAdminEmail(e.target.value)}
             placeholder="Email..."
-            className="flex-1 bg-slate-700/50 border border-purple-500/20 rounded-xl px-3 py-2 sm:px-4 sm:py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 text-sm"
+            className="flex-1 bg-[#222]/50 border border-[#333] rounded-xl px-3 py-2 sm:px-4 sm:py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 text-sm"
           />
           <button
             type="submit"
             disabled={addingAdmin || !newAdminEmail.trim()}
-            className="px-4 py-2 sm:px-6 sm:py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
+            className="px-4 py-2 sm:px-6 sm:py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
           >
             {addingAdmin ? (
               <>
@@ -276,18 +276,18 @@ const AdminSettingsPage = () => {
           {admins.map((adminEmail) => (
             <div 
               key={adminEmail}
-              className="flex items-center justify-between p-2 sm:p-4 bg-slate-700/30 rounded-xl border border-purple-500/10 gap-2"
+              className="flex items-center justify-between p-2 sm:p-4 bg-[#222]/50 rounded-xl border border-[#333] gap-2"
             >
               <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-purple-500/20 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-purple-400 text-xs sm:text-sm font-medium">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-orange-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-orange-400 text-xs sm:text-sm font-medium">
                     {adminEmail.charAt(0).toUpperCase()}
                   </span>
                 </div>
                 <div className="min-w-0">
                   <p className="text-white font-medium text-xs sm:text-sm truncate">{adminEmail}</p>
                   {adminEmail.toLowerCase() === superAdmin.toLowerCase() && (
-                    <span className="text-purple-400 text-[10px] sm:text-xs">Super Admin</span>
+                    <span className="text-orange-400 text-[10px] sm:text-xs">Super Admin</span>
                   )}
                 </div>
               </div>
@@ -321,21 +321,21 @@ const AdminSettingsPage = () => {
       {/* Add Admin Confirmation Modal */}
       {addAdminModal.show && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-800 rounded-2xl p-6 max-w-md w-full border border-purple-500/20">
+          <div className="bg-[#111] rounded-2xl p-6 max-w-md w-full border border-[#333]">
             <h3 className="text-xl font-bold text-white mb-2">Add Admin</h3>
             <p className="text-gray-400 mb-6">
-              Are you sure you want to add <span className="text-purple-400">{addAdminModal.email}</span> as an admin?
+              Are you sure you want to add <span className="text-orange-400">{addAdminModal.email}</span> as an admin?
             </p>
             <div className="flex gap-3">
               <button
                 onClick={() => setAddAdminModal({ show: false, email: '' })}
-                className="flex-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-medium transition-colors"
+                className="flex-1 px-4 py-2 bg-[#222] hover:bg-[#333] text-white rounded-xl font-medium transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={confirmAddAdmin}
-                className="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-medium transition-colors"
+                className="flex-1 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-medium transition-colors"
               >
                 Confirm
               </button>
@@ -347,7 +347,7 @@ const AdminSettingsPage = () => {
       {/* Remove Admin Confirmation Modal */}
       {removeAdminModal.show && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-800 rounded-2xl p-6 max-w-md w-full border border-purple-500/20">
+          <div className="bg-[#111] rounded-2xl p-6 max-w-md w-full border border-[#333]">
             <h3 className="text-xl font-bold text-white mb-2">Remove Admin</h3>
             <p className="text-gray-400 mb-6">
               Are you sure you want to remove <span className="text-red-400">{removeAdminModal.email}</span> from admins?
@@ -355,7 +355,7 @@ const AdminSettingsPage = () => {
             <div className="flex gap-3">
               <button
                 onClick={() => setRemoveAdminModal({ show: false, email: '' })}
-                className="flex-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-medium transition-colors"
+                className="flex-1 px-4 py-2 bg-[#222] hover:bg-[#333] text-white rounded-xl font-medium transition-colors"
               >
                 Cancel
               </button>

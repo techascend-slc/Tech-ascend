@@ -13,16 +13,16 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 shadow-lg fixed w-full top-0 z-50">
+    <nav className="bg-[#0a0a0a]/90 backdrop-blur-md border-b border-[#222] fixed w-full top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+            <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-500 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
               <span className="text-white font-bold text-xl">T</span>
             </div>
             <span className="text-white font-bold text-xl tracking-tight">
-              Tech <span className="text-purple-400">Ascend</span>
+              Tech <span className="text-orange-500">Ascend</span>
             </span>
           </Link>
 
@@ -33,28 +33,28 @@ const Navbar = () => {
               className="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group"
             >
               Home
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               href="/events"
               className="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group"
             >
               Events
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               href="/about"
               className="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group"
             >
               About
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               href="/contact"
               className="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group"
             >
               Contact
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 group-hover:w-full transition-all duration-300"></span>
             </Link>
           </div>
 
@@ -67,7 +67,7 @@ const Navbar = () => {
                 </button>
               </SignInButton>
               <SignInButton mode="modal">
-                <button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-5 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
+                <button className="bg-white text-black hover:bg-gray-200 px-5 py-2 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
                   Registration
                 </button>
               </SignInButton>
@@ -75,7 +75,7 @@ const Navbar = () => {
             <SignedIn>
               <Link
                 href="/events"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-5 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25"
+                className="bg-white text-black hover:bg-gray-200 px-5 py-2 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 Registration
               </Link>
@@ -89,7 +89,7 @@ const Navbar = () => {
                 afterSignOutUrl="/"
                 appearance={{
                   elements: {
-                    avatarBox: "w-10 h-10 ring-2 ring-purple-500 ring-offset-2 ring-offset-slate-900"
+                    avatarBox: "w-10 h-10 ring-2 ring-orange-500 ring-offset-2 ring-offset-slate-900"
                   }
                 }}
               />
@@ -113,7 +113,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <div className={`md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-96 pb-4' : 'max-h-0'}`}>
-          <div className="flex flex-col space-y-3 pt-4 border-t border-purple-800/50">
+          <div className="flex flex-col space-y-3 pt-4 border-t border-[#333]">
             <Link
               href="/"
               className="text-gray-300 hover:text-white transition-colors duration-300 font-medium px-2 py-2"
@@ -142,7 +142,7 @@ const Navbar = () => {
             >
               Contact
             </Link>
-            <div className="flex flex-col space-y-3 pt-3 border-t border-purple-800/50">
+            <div className="flex flex-col space-y-3 pt-3 border-t border-[#333]">
               <SignedOut>
                 <SignInButton mode="modal">
                   <button className="text-gray-300 hover:text-white transition-colors duration-300 font-medium px-2 py-2 text-left">
@@ -150,7 +150,7 @@ const Navbar = () => {
                   </button>
                 </SignInButton>
                 <SignInButton mode="modal">
-                  <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-5 py-2 rounded-full font-medium text-center">
+                  <button className="bg-white text-black px-5 py-2 rounded-lg font-bold text-center">
                     Registration
                   </button>
                 </SignInButton>
@@ -158,7 +158,7 @@ const Navbar = () => {
               <SignedIn>
                 <Link
                   href="/events"
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-5 py-2 rounded-full font-medium text-center"
+                  className="bg-white text-black px-5 py-2 rounded-lg font-bold text-center"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Registration

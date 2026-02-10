@@ -12,9 +12,9 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 flex items-center justify-center">
+    <div className="min-h-screen bg-[#0a0a0a] pt-24 flex items-center justify-center">
       <div className="text-center px-4">
-        <div className="w-24 h-24 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
+        <div className="w-24 h-24 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
           <span className="text-5xl">📬</span>
         </div>
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -26,13 +26,13 @@ export default function ContactPage() {
         <div className="flex gap-4 justify-center">
           <Link 
             href="/"
-            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-medium transition-colors"
+            className="px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-medium transition-colors"
           >
             ← Back to Home
           </Link>
           <Link 
             href="/events"
-            className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-medium transition-colors"
+            className="px-6 py-3 bg-[#222] hover:bg-[#333] text-white rounded-xl font-medium transition-colors"
           >
             View Events
           </Link>
